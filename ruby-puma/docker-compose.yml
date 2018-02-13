@@ -1,0 +1,12 @@
+version: '2'
+services:
+  app:
+    image: ruby-puma
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - '9293:9292'
+    volumes:
+      - ./:/home/app
+    command: "rackup config.ru"

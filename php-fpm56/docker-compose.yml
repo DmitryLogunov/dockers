@@ -1,0 +1,22 @@
+version: '2.1'
+services:
+  app:
+    image: 'api-server-factorial'
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./src:/usr/src/app/
+  nginx:
+    image: nginx
+    ports:
+      - '8892:80'
+    depends_on:
+      - app
+    volumes:
+      - ./_docker/nginx:/usr/src/_docker/nginx/
+      - ./src:/usr/src/app/
+      - ./_docker/sh/start-nginx.sh:/usr/sh/start-nginx.sh
+    entrypoint: 'sh /usr/sh/start-nginx.sh'

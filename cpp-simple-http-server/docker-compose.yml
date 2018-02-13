@@ -1,0 +1,9 @@
+version: '2.1'
+services:
+  app:
+    image: "http-server-api"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - '8888:8888'
